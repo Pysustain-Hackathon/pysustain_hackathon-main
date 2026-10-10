@@ -2,4 +2,3 @@ venv/
 .env
 *.pdf
 *.docx
-soil_images_for_ai_training/
