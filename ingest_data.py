@@ -35,6 +35,10 @@ REGIONS = [
     {"district": "Varanasi", "state": "Uttar Pradesh", "lat": 25.31, "lon": 82.97}
 ]
 
+REGION_SOIL = {"Ludhiana": "Alluvial", "Karnal": "Alluvial", "Varanasi": "Alluvial",
+               "Bardhaman": "Alluvial", "Jaipur": "Alluvial", "Nashik": "Black",
+               "Guntur": "Black", "Mandya": "Red"}
+
 CROP_AGRONOMY = {
     "Wheat": {"N": (100, 140), "P": (20, 35), "K": (120, 200), "pH": (6.0, 7.5), "texture": "Sandy Loam", "yield": (18.0, 24.0), "ndvi": (0.60, 0.85), "irrig": (350, 500)},
     "Rice": {"N": (80, 120), "P": (30, 50), "K": (40, 80), "pH": (5.5, 7.0), "texture": "Clay Loam", "yield": (20.0, 28.0), "ndvi": (0.65, 0.90), "irrig": (900, 1300)},
@@ -56,6 +60,7 @@ def init_cloud_schema():
         conn.execute(text("DROP TABLE IF EXISTS weather CASCADE;"))
         conn.execute(text("DROP TABLE IF EXISTS farms CASCADE;"))
         conn.execute(text("DROP TABLE IF EXISTS market_prices CASCADE;"))
+        conn.execute(text("DROP TABLE IF EXISTS satellite_data CASCADE;"))
         
         conn.execute(text("""
         CREATE TABLE farms (
@@ -82,6 +87,7 @@ def init_cloud_schema():
             phosphorus_kg_ha DOUBLE PRECISION,
             potassium_kg_ha DOUBLE PRECISION,
             texture VARCHAR(50),
+            soil_group VARCHAR(30)
             ndvi_mean DOUBLE PRECISION,
             ndvi_max DOUBLE PRECISION
         );
@@ -146,6 +152,7 @@ def seed_large_dataset(num_farms=250):
             "phosphorus_kg_ha": round(random.uniform(*agronomy["P"]), 1),
             "potassium_kg_ha": round(random.uniform(*agronomy["K"]), 1),
             "texture": agronomy["texture"],
+            "soil_group": REGION_SOIL[region["district"]],
             "ndvi_mean": round(random.uniform(*agronomy["ndvi"]), 3),
             "ndvi_max": round(random.uniform(agronomy["ndvi"][1], agronomy["ndvi"][1] + 0.08), 3)
         })
