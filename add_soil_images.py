@@ -10,7 +10,7 @@ How the photos are found:
 
       Alluvial           ->  soil_images/alluvial.jpg
       Black              ->  soil_images/black.jpg
-      Laterite           ->  soil_images/laterite.png        (.jpg .jpeg .png .webp all work)
+      Laterite           ->  soil_images/laterite.png        (.jpg works)
 
   The script prints which soil types still have no photo, so you can add them and run it again.
 

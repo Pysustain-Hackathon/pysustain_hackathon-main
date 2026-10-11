@@ -1,4 +1,4 @@
-"""
+""" Kinda failed mb
 FASAL — Mobile-First Android Browser Adaptation & Digital Farm Twin.
 PySustain-2026 Sustainable Agriculture Decision-Support Prototype.
 
